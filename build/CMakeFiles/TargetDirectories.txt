@@ -1,0 +1,7 @@
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/eniq_parser.dir
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/sqlite3_ext.dir
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/query_db.dir
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/test_parser.dir
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/run_tests.dir
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Alexey/Desktop/min/Eniq/build/CMakeFiles/ZERO_CHECK.dir

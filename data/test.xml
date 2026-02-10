@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<measCollec beginTime="2026-02-10T00:00:00Z">
+  <measInfo measInfoId="m1">
+    <measTypes>cnt1 cnt2</measTypes>
+    <measValue>
+      <measObjLdn>MO1</measObjLdn>
+      <r>1.0</r>
+      <r>2.0</r>
+    </measValue>
+  </measInfo>
+</measCollec>

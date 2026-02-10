@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="ALL_BUILD.vcxproj" Id="3f650931-df3e-37f3-b7d8-2d7b71c48a8d">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="eniq_parser.vcxproj"/>
+		<BuildDependency Project="query_db.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+		<BuildDependency Project="test_parser.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="ZERO_CHECK.vcxproj" Id="6f1ba820-f4c5-3e65-9816-ae273497ab12"/>
+	<Project Path="eniq_parser.vcxproj" Id="f4de4bf8-11a3-346a-85a4-bb0f13af8f6a">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="query_db.vcxproj" Id="0cc931f2-1c20-3762-97c8-48cce60d36b4">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="run_tests.vcxproj" Id="eea3098c-682b-34e7-8de8-d23eec615be1">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="test_parser.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="sqlite3_ext.vcxproj" Id="25fc4ca9-56f5-3057-ab45-1b828888dba6">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="test_parser.vcxproj" Id="d0817acf-e692-33a6-868a-9e3346b28c22">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+</Solution>
