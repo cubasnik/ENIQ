@@ -2,7 +2,7 @@
 
 ## Project snapshot (discoverable)
 - This repo currently contains only a C/C++-style `.gitignore` and no committed source tree.
-- The user provided a working example `main.cpp` that parses Ericsson PM XML and inserts rows into PostgreSQL using `libpqxx` and `pugixml` (header-only). That example is not yet in the repo but is the authoritative reference for expected behavior.
+- The user provided a working example `main.cpp` that parses EricssonSoft PM XML and inserts rows into PostgreSQL using `libpqxx` and `pugixml` (header-only). That example is not yet in the repo but is the authoritative reference for expected behavior.
 
 ## Purpose of this guidance
 Make an AI coding agent immediately productive for adding C++ tooling, parser code, and DB integration matching the provided example.
@@ -42,7 +42,7 @@ CREATE TABLE pm_counters (
 ```
 
 ## Discoverable code patterns & conventions (from example)
-- Parsers expect Ericsson PM XML `measCollec -> measInfo -> measValue -> r` patterns.
+- Parsers expect EricssonSoft PM XML `measCollec -> measInfo -> measValue -> r` patterns.
 - The code collects `measTypes` (space-separated names) and maps `r` elements by index to those names.
 - Use `std::filesystem` for directory traversal and `.xml` extension checks.
 - Use `pqxx::work` for batched inserts and `exec_params` for parameterized queries.
@@ -59,7 +59,7 @@ CREATE TABLE pm_counters (
 
 1. Create the `pm_counters` table (use the SQL above).
 2. Build the example binary with the command above (adjusting for platform and installed libs).
-3. Run the parser against a directory of Ericsson PM XML files or a single file:
+3. Run the parser against a directory of EricssonSoft PM XML files or a single file:
 
 ```sh
 ./eniq_parser /path/to/pm_xml_files

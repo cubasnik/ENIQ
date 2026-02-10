@@ -4,6 +4,9 @@
 #include <unordered_set>
 #include <string>
 
+// default language flag (can be set by main)
+bool g_use_russian = false;
+
 static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
     return 0;
 }
@@ -12,7 +15,8 @@ bool initDatabase(const std::string& dbPath) {
     sqlite3* db;
     int rc = sqlite3_open(dbPath.c_str(), &db);
     if (rc) {
-        std::cerr << "Ошибка открытия БД: " << (db ? sqlite3_errmsg(db) : "(no handle)") << "\n";
+        if (g_use_russian) std::cerr << "Ошибка открытия БД: " << (db ? sqlite3_errmsg(db) : "(no handle)") << "\n";
+        else std::cerr << "DB open error: " << (db ? sqlite3_errmsg(db) : "(no handle)") << "\n";
         if (db) sqlite3_close(db);
         return false;
     }
@@ -30,7 +34,8 @@ bool initDatabase(const std::string& dbPath) {
     char* errMsg = nullptr;
     rc = sqlite3_exec(db, sql, callback, 0, &errMsg);
     if (rc != SQLITE_OK) {
-        std::cerr << "SQL error: " << (errMsg ? errMsg : "") << "\n";
+        if (g_use_russian) std::cerr << "SQL ошибка: " << (errMsg ? errMsg : "") << "\n";
+        else std::cerr << "SQL error: " << (errMsg ? errMsg : "") << "\n";
         if (errMsg) sqlite3_free(errMsg);
     }
 
@@ -39,7 +44,8 @@ bool initDatabase(const std::string& dbPath) {
         "CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_pm ON pm_counters (timestamp, mo_ldn, meas_type, counter_name);";
     rc = sqlite3_exec(db, idx_sql, callback, 0, &errMsg);
     if (rc != SQLITE_OK) {
-        std::cerr << "SQL index error: " << (errMsg ? errMsg : "") << "\n";
+        if (g_use_russian) std::cerr << "Ошибка индекса SQL: " << (errMsg ? errMsg : "") << "\n";
+        else std::cerr << "SQL index error: " << (errMsg ? errMsg : "") << "\n";
         if (errMsg) sqlite3_free(errMsg);
     }
 
@@ -61,14 +67,16 @@ bool saveRecords(const std::string& dbPath, const std::vector<CounterRecord>& re
     }
 
     if (filtered.empty()) {
-        std::cout << "Нет новых записей для сохранения\n";
+        if (g_use_russian) std::cout << "Нет новых записей для сохранения\n";
+        else std::cout << "No new records to save\n";
         return true;
     }
 
     sqlite3* db = nullptr;
     int rc = sqlite3_open(dbPath.c_str(), &db);
     if (rc) {
-        std::cerr << "Ошибка открытия БД: " << (db ? sqlite3_errmsg(db) : "(no handle)") << "\n";
+        if (g_use_russian) std::cerr << "Ошибка открытия БД: " << (db ? sqlite3_errmsg(db) : "(no handle)") << "\n";
+        else std::cerr << "DB open error: " << (db ? sqlite3_errmsg(db) : "(no handle)") << "\n";
         if (db) sqlite3_close(db);
         return false;
     }
@@ -81,7 +89,8 @@ bool saveRecords(const std::string& dbPath, const std::vector<CounterRecord>& re
     rc = sqlite3_prepare_v2(db, sql_ins, -1, &stmt, nullptr);
 
     if (rc != SQLITE_OK) {
-        std::cerr << "Prepare error: " << sqlite3_errmsg(db) << "\n";
+        if (g_use_russian) std::cerr << "Ошибка подготовки запроса: " << sqlite3_errmsg(db) << "\n";
+        else std::cerr << "Prepare error: " << sqlite3_errmsg(db) << "\n";
         sqlite3_close(db);
         return false;
     }
@@ -101,7 +110,8 @@ bool saveRecords(const std::string& dbPath, const std::vector<CounterRecord>& re
     sqlite3_exec(db, "COMMIT;", nullptr, nullptr, nullptr);
     sqlite3_close(db);
 
-    std::cout << "Сохранено " << filtered.size() << " новых записей (из " << records.size() << ")\n";
+    if (g_use_russian) std::cout << "Сохранено " << filtered.size() << " новых записей (из " << records.size() << ")\n";
+    else std::cout << "Saved " << filtered.size() << " new records (of " << records.size() << ")\n";
     return true;
 }
 

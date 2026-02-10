@@ -1,6 +1,6 @@
 # ENIQ-like PM Parser 
  
-Простой C++ парсер Ericsson Performance Management XML-файлов с сохранением в SQLite. 
+я┐╜я┐╜я┐╜той C++ я┐╜я┐╜я┐╜я┐╜я┐╜ EricssonSoft Performance Management XML-файя┐╜я┐╜я┐╜ я┐╜ я┐╜я┐╜раня┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜ SQLite. 
  
-## Как собрать 
+## я┐╜я┐╜я┐╜ собя┐╜я┐╜я┐╜ 
 cl /nologo /EHsc /O2 /std:c++17 src\*.cpp external\pugixml\pugixml.cpp external\sqlite3.c /I external\pugixml /I external /Fe:eniq.exe 

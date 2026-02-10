@@ -1,10 +1,12 @@
 #include <sqlite3.h>
+#include "db_writer.h"
 #include <iostream>
 
 int main() {
     sqlite3* db = nullptr;
     if (sqlite3_open("eniq_data.db", &db) != SQLITE_OK) {
-        std::cerr << "Ошибка открытия eniq_data.db\n";
+        if (g_use_russian) std::cerr << "Ошибка открытия eniq_data.db\n";
+        else std::cerr << "Error opening eniq_data.db\n";
         return 1;
     }
 
@@ -13,7 +15,8 @@ int main() {
     if (sqlite3_prepare_v2(db, qcount, -1, &stmt, nullptr) == SQLITE_OK) {
         if (sqlite3_step(stmt) == SQLITE_ROW) {
             int cnt = sqlite3_column_int(stmt, 0);
-            std::cout << "rows_count: " << cnt << "\n";
+            if (g_use_russian) std::cout << "строк всего: " << cnt << "\n";
+            else std::cout << "rows_count: " << cnt << "\n";
         }
         sqlite3_finalize(stmt);
     }

@@ -1,14 +1,16 @@
 #include "xml_parser.h"
+#include "db_writer.h"
 #include <pugixml.hpp>
 #include <sstream>
 #include <iostream>
 
-bool parse_ericsson_pm_xml(const std::string& xmlPath, std::vector<CounterRecord>& records) {
+bool parse_ericssonsoft_pm_xml(const std::string& xmlPath, std::vector<CounterRecord>& records) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(xmlPath.c_str(), pugi::parse_default | pugi::parse_trim_pcdata);
 
     if (!result) {
-        std::cerr << "Ошибка XML: " << result.description() << " в файле " << xmlPath << "\n";
+        if (g_use_russian) std::cerr << "Ошибка XML: " << result.description() << " в файле " << xmlPath << "\n";
+        else std::cerr << "XML error: " << result.description() << " in file " << xmlPath << "\n";
         return false;
     }
 
@@ -50,5 +52,5 @@ bool parse_ericsson_pm_xml(const std::string& xmlPath, std::vector<CounterRecord
 
     return true;
 }
-// Only `parseEricssonPM` is provided; duplicate alternative implementations
+// Only `parseEricssonSoftPM` is provided; duplicate alternative implementations
 // were removed to avoid redundancy and conflicting declarations.

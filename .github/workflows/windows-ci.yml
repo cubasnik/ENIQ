@@ -1,0 +1,40 @@
+name: Windows CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        config: [Release, Debug]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.config }}
+
+    - name: Build
+      run: cmake --build build --config ${{ matrix.config }}
+
+    - name: Run tests on Windows
+      if: runner.os == 'Windows'
+      run: |
+        build\${{ matrix.config }}\test_parser.exe
+        build\${{ matrix.config }}\test_localization.exe
+
+    - name: Run tests on Linux
+      if: runner.os == 'Linux'
+      run: |
+        ./build/test_parser
+        ./build/test_localization
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-${{ matrix.os }}-${{ matrix.config }}
+        path: build

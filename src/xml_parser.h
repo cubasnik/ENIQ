@@ -10,6 +10,6 @@ struct CounterRecord {
     double value = 0.0;
 };
 
-// Parse Ericsson PM XML at `xmlPath` and append found records to `records`.
+// Parse EricssonSoft PM XML at `xmlPath` and append found records to `records`.
 // Returns true on success.
-bool parse_ericsson_pm_xml(const std::string& xmlPath, std::vector<CounterRecord>& records);
+bool parse_ericssonsoft_pm_xml(const std::string& xmlPath, std::vector<CounterRecord>& records);
