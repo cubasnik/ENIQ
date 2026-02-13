@@ -1,34 +1,64 @@
 # Copilot instructions
 
+## Summary
+Concise guidance to make an AI coding agent productive in this C++ repository that parses EricssonSoft PM XML and writes metrics to PostgreSQL. Focus areas: build and test on Windows (CMake/MSVC), XML parsing patterns, DB integration (`libpqxx`), and repo conventions.
+
 ## Project snapshot (discoverable)
-- This repo currently contains only a C/C++-style `.gitignore` and no committed source tree.
-- The user provided a working example `main.cpp` that parses Ericsson PM XML and inserts rows into PostgreSQL using `libpqxx` and `pugixml` (header-only). That example is not yet in the repo but is the authoritative reference for expected behavior.
+- Sources: `src/` contains the main components: `xml_parser.cpp/.h`, `db_writer.cpp/.h`, `logger.cpp/.h`, `main.cpp`, and `query_db.cpp`.
+- Tests: `tests/` contains unit/CLI tests (several test_*.cpp files and a Visual Studio test project in `build/`).
+- Build: `CMakeLists.txt` at repo root; generated Visual Studio solution and project files exist under `build/`.
+- Extras: `external/pugixml/` and `external/sqlite3.*` are vendored; `data/` holds sample XML files.
 
-## Purpose of this guidance
-Make an AI coding agent immediately productive for adding C++ tooling, parser code, and DB integration matching the provided example.
+## Big picture & data flow
+- Input: EricssonSoft PM XML files (see `data/test.xml`, `data/test_ns.xml`).
+- Parsing: `xml_parser` reads `measCollec -> measInfo -> measValue -> r` and maps `measTypes` (space-separated) to `r` elements by index.
+- Processing: `main.cpp` orchestrates directory traversal and hands parsed records to `db_writer`.
+- Storage: `db_writer` uses `libpqxx` (`pqxx::work` + `exec_params`) to insert into PostgreSQL table `pm_counters`.
 
-## Build / Run (concrete, reproducible)
-- Compiler: code targets **C++17** and uses `std::filesystem` and `std::chrono`.
-- Example native (Linux/macOS) build command from the example header in `main.cpp`:
+## Key files to inspect
+- `src/xml_parser.cpp` / `src/xml_parser.h` — XML traversal + mapping `measTypes` → `r` values.
+- `src/db_writer.cpp` / `src/db_writer.h` — connection handling, batching with `pqxx::work`, parameterized `exec_params` inserts.
+- `src/main.cpp` — CLI entry: accepts file/dir paths, uses `std::filesystem` to iterate `.xml` files.
+- `tests/test_pg_integration.cpp` — example of integration test that exercises DB inserts.
 
-```sh
-g++ -std=c++17 -O2 -Wall main.cpp -lpqxx -lpq -lpugixml -o eniq_parser
+## Build & run (Windows-first examples)
+- Configure (Visual Studio generator, x64):
+
+```powershell
+mkdir build
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+cmake --build build --config Release
 ```
 
-- Notes:
-	- `libpqxx` and `libpq` must be installed on the machine and available to the linker.
-	- `pugixml` can be used header-only (include `pugixml.hpp`) or by adding `pugixml.cpp` to the build.
-	- On Windows, adjust the compiler/linker and library names accordingly (MSVC/MinGW + correct .lib/.dll or .a).
+- Or use Ninja/MinGW if available:
 
-## Runtime / DB integration
-- The example connects to PostgreSQL via a libpqxx connection string (hardcoded in example):
-
-```text
-dbname=eniq user=postgres password=yourpass host=localhost port=5432
+```powershell
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 ```
 
-- Table referenced by the code: `pm_counters` with columns used in INSERT: `timestamp`, `mo_ldn`, `meas_type`, `counter_name`, `value`.
-- Example minimal schema to create for local testing:
+- Run the parser (binary appears under `build/` Visual Studio layout, e.g. `build/Release/eniq_parser.exe` or use VS debugger):
+
+```powershell
+build\Release\eniq_parser.exe C:\path\to\xml\dir
+```
+
+## Tests & CI
+- Unit and integration tests live in `tests/` and are wired into the generated solution. Run with CTest or the Visual Studio Test Explorer.
+- CI workflows: inspect `.github/workflows/windows-ci.yml` and `pg-integration.yml` for matrix env and Postgres setup details.
+
+## Dependencies & integration points
+- Runtime: `libpqxx` (+ `libpq`), `pugixml` (vendored under `external/pugixml/`), optional `sqlite3` in `external/`.
+- DB: code expects a `pm_counters` table (columns: `timestamp`, `mo_ldn`, `meas_type`, `counter_name`, `value`). Prefer using environment variables for connection strings; tests/CI show how Postgres is provisioned.
+
+## Repo-specific conventions & patterns
+- Place new C++ files under `src/`, add targets in `CMakeLists.txt`.
+- Parsing pattern: parse `measTypes` into an indexable vector and map each `r` element by the same index (see `xml_parser.cpp`).
+- DB pattern: use `pqxx::work` for transactional batch inserts and `exec_params` for parameterized queries (see `db_writer.cpp`).
+- Tests: follow `tests/test_*.cpp` naming; test projects are included in the CMake-generated solution.
+
+## Quick verification steps
+1. Create `pm_counters` table (example SQL in project root or below):
 
 ```sql
 CREATE TABLE pm_counters (
@@ -41,38 +71,13 @@ CREATE TABLE pm_counters (
 );
 ```
 
-## Discoverable code patterns & conventions (from example)
-- Parsers expect Ericsson PM XML `measCollec -> measInfo -> measValue -> r` patterns.
-- The code collects `measTypes` (space-separated names) and maps `r` elements by index to those names.
-- Use `std::filesystem` for directory traversal and `.xml` extension checks.
-- Use `pqxx::work` for batched inserts and `exec_params` for parameterized queries.
-
-## Project-specific recommendations for adding code
-- Put new C++ source under a `src/` folder; place small test harness/executable at `src/main.cpp`.
-- Add a `Makefile` or `CMakeLists.txt` (preferred) that documents required libraries: `libpqxx`, `libpq`, and optionally `pugixml`.
-- If adding `pugixml` to repo, either:
-	- vendor `pugixml.hpp` only and use header-only mode, or
-	- add `pugixml.cpp` into the build for a stable single-file compile.
-
-## Testing and quick verification
-- To smoke-test parsing and DB insertion locally:
-
-1. Create the `pm_counters` table (use the SQL above).
-2. Build the example binary with the command above (adjusting for platform and installed libs).
-3. Run the parser against a directory of Ericsson PM XML files or a single file:
-
-```sh
-./eniq_parser /path/to/pm_xml_files
-```
+2. Build using CMake (see above).
+3. Run the parser against `data/` and confirm inserts via `query_db` or direct SQL.
 
 ## What to avoid / known assumptions
-- Do not assume a JSON API or web server; current focus is a CLI batch parser that writes to Postgres.
-- The example uses text for the `timestamp` column — if you prefer timestamps, convert and normalize when modifying schema.
-
-## References & next actions for the agent
-- If you add code, include a `README.md` with build instructions and a `CMakeLists.txt` or `Makefile`.
-- When unsure about runtime DB credentials, prefer environment variables or a `config.json` and do not hardcode secrets in source.
+- This is a CLI batch parser focused on writing to Postgres — not a web service.
+- Do not hardcode DB credentials; prefer `ENIQ_DB_CONN` or a `config.json` for secrets.
 
 ---
 
-If any of these assumptions are incorrect (different target language, DB, or desired output schema), tell me the intended direction and I will update these instructions. Please review and point out anything missing or unclear.
+If anything here is incorrect or you want this adapted for Linux/macOS builds, additional CI, or switching to packaged `pugixml`, tell me which target and I'll update the file.

@@ -1,5 +1,6 @@
 C:\Users\Alexey\Desktop\min\Eniq\src\main.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\eniq_parser.dir\Release\main.obj
 C:\Users\Alexey\Desktop\min\Eniq\src\xml_parser.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\eniq_parser.dir\Release\xml_parser.obj
 C:\Users\Alexey\Desktop\min\Eniq\src\db_writer.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\eniq_parser.dir\Release\db_writer.obj
+C:\Users\Alexey\Desktop\min\Eniq\src\logger.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\eniq_parser.dir\Release\logger.obj
 C:\Users\Alexey\Desktop\min\Eniq\external\pugixml\pugixml.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\eniq_parser.dir\Release\pugixml.obj
 C:\Users\Alexey\Desktop\min\Eniq\external\sqlite3.c;C:\Users\Alexey\Desktop\min\Eniq\build\eniq_parser.dir\Release\sqlite3.obj

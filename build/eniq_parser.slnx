@@ -10,9 +10,26 @@
 	<Project Path="ALL_BUILD.vcxproj" Id="3f650931-df3e-37f3-b7d8-2d7b71c48a8d">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="eniq_parser.vcxproj"/>
+		<BuildDependency Project="print_qpi.vcxproj"/>
 		<BuildDependency Project="query_db.vcxproj"/>
 		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+		<BuildDependency Project="test_clean_test_records.vcxproj"/>
+		<BuildDependency Project="test_cli.vcxproj"/>
+		<BuildDependency Project="test_csv_suffix_option.vcxproj"/>
+		<BuildDependency Project="test_gz_parser.vcxproj"/>
+		<BuildDependency Project="test_localization.vcxproj"/>
 		<BuildDependency Project="test_parser.vcxproj"/>
+		<BuildDependency Project="test_parser_ns.vcxproj"/>
+		<BuildDependency Project="test_qpi_query.vcxproj"/>
+		<BuildDependency Project="test_rebuild_indexes.vcxproj"/>
+		<BuildDependency Project="test_summary_options.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="RUN_TESTS.vcxproj" Id="493acc44-90ae-3dff-9a5d-e73c08402251">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<Build Solution="Debug|*" Project="false"/>
 		<Build Solution="Release|*" Project="false"/>
 		<Build Solution="MinSizeRel|*" Project="false"/>
@@ -23,9 +40,37 @@
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="sqlite3_ext.vcxproj"/>
 	</Project>
+	<Project Path="print_qpi.vcxproj" Id="abe0e8a5-116f-3e4b-85a4-b8a0ed23ed27">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
 	<Project Path="query_db.vcxproj" Id="0cc931f2-1c20-3762-97c8-48cce60d36b4">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="run_cli_tests.vcxproj" Id="4197a017-bde0-3d93-a9be-1e2af8cb3b1e">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="test_cli.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="run_localization_tests.vcxproj" Id="90df375f-2935-322e-9492-1ed22ccf6355">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="test_localization.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="run_ns_tests.vcxproj" Id="b404eea1-204f-31c2-bc65-9f7727992871">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="test_parser_ns.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
 	</Project>
 	<Project Path="run_tests.vcxproj" Id="eea3098c-682b-34e7-8de8-d23eec615be1">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
@@ -38,7 +83,43 @@
 	<Project Path="sqlite3_ext.vcxproj" Id="25fc4ca9-56f5-3057-ab45-1b828888dba6">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
+	<Project Path="test_clean_test_records.vcxproj" Id="9a972e92-992a-3dad-be97-cac55dced61a">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_cli.vcxproj" Id="01df6b4c-fcd0-3423-8a4d-f4c907f80682">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_csv_suffix_option.vcxproj" Id="d673672f-97d3-30dd-96e2-13df449f7d53">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_gz_parser.vcxproj" Id="528ca282-7add-386b-80f0-a19052b6bcc2">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_localization.vcxproj" Id="ead1ba48-4a92-3699-b75e-ad796464db10">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
 	<Project Path="test_parser.vcxproj" Id="d0817acf-e692-33a6-868a-9e3346b28c22">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_parser_ns.vcxproj" Id="d145fde9-e9c0-3798-9e44-c0c56a07293e">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_qpi_query.vcxproj" Id="db9b2c6e-9162-3a19-8405-4d7257e26d17">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_rebuild_indexes.vcxproj" Id="fd0d669f-41e2-3fbc-a2b4-3d93a0656845">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="sqlite3_ext.vcxproj"/>
+	</Project>
+	<Project Path="test_summary_options.vcxproj" Id="eb0457df-4810-3977-82ed-3feac8519ae2">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="sqlite3_ext.vcxproj"/>
 	</Project>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Alexey\Desktop\min\Eniq\build\CMakeFiles\37a1cef0eb4ccf3910a95007196ce805\run_cli_tests.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Alexey\Desktop\min\Eniq\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Alexey\Desktop\min\Eniq\build\CMakeFiles\run_cli_tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A954EA0E-3FAA-324F-BB90-9EB9374AA981}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

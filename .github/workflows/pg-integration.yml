@@ -1,0 +1,37 @@
+name: Postgres Integration Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  pg-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test -d testdb" --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libpqxx-dev libpq-dev pkg-config
+      - name: Configure (enable pqxx)
+        run: cmake -S . -B build -DENABLE_PQXX=ON -DCMAKE_BUILD_TYPE=Release
+      - name: Build test target
+        run: cmake --build build --config Release --target test_pg_integration
+      - name: Run Postgres integration test
+        env:
+          PGTEST_DSN: "dbname=testdb user=test password=test host=localhost port=5432"
+        run: |
+          ./build/Release/test_pg_integration || (cat build/Release/test_pg_integration.exe && exit 1)
