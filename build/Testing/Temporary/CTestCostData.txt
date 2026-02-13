@@ -1,0 +1,7 @@
+test_gz_parser 2 0.0375615
+test_clean_test_records 1 0.273495
+test_summary_options 2 0.068964
+test_csv_suffix_option 2 0.0651739
+test_qpi_query 4 0.0264887
+test_rebuild_indexes 1 0.239319
+---

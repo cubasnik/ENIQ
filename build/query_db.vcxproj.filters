@@ -4,6 +4,12 @@
     <ClCompile Include="C:\Users\Alexey\Desktop\min\Eniq\src\query_db.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexey\Desktop\min\Eniq\src\db_writer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Alexey\Desktop\min\Eniq\src\logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\Alexey\Desktop\min\Eniq\CMakeLists.txt" />

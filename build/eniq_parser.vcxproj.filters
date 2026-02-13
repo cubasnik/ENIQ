@@ -10,6 +10,9 @@
     <ClCompile Include="C:\Users\Alexey\Desktop\min\Eniq\src\db_writer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\Alexey\Desktop\min\Eniq\src\logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\Alexey\Desktop\min\Eniq\external\pugixml\pugixml.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

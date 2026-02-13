@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:measCollec xmlns:ns="urn:ericsson:pm" beginTime="2026-02-10T00:00:00Z">
+  <ns:measInfo measInfoId="m1">
+    <ns:measTypes>cnt1 cnt2</ns:measTypes>
+    <ns:measValue>
+      <ns:measObjLdn>MO1</ns:measObjLdn>
+      <ns:r>1.0</ns:r>
+      <ns:r>2.0</ns:r>
+    </ns:measValue>
+  </ns:measInfo>
+</ns:measCollec>

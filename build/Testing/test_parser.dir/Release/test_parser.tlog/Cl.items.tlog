@@ -1,0 +1,5 @@
+C:\Users\Alexey\Desktop\min\Eniq\tests\test_parser.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\test_parser.dir\Release\test_parser.obj
+C:\Users\Alexey\Desktop\min\Eniq\src\xml_parser.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\test_parser.dir\Release\xml_parser.obj
+C:\Users\Alexey\Desktop\min\Eniq\src\db_writer.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\test_parser.dir\Release\db_writer.obj
+C:\Users\Alexey\Desktop\min\Eniq\external\pugixml\pugixml.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\test_parser.dir\Release\pugixml.obj
+C:\Users\Alexey\Desktop\min\Eniq\src\logger.cpp;C:\Users\Alexey\Desktop\min\Eniq\build\test_parser.dir\Release\logger.obj

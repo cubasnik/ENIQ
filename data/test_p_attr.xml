@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<measCollec beginTime="2026-02-12T12:00:00Z">
+  <measInfo measInfoId="m1">
+    <measType p="1">ctr1</measType>
+    <measType p="2">ctr2</measType>
+    <measType p="3">ctr_csv</measType>
+    <measValue>
+      <measObjLdn>MO-A</measObjLdn>
+      <r p="1">100</r>
+      <r p="2">200</r>
+      <r p="3">1.1, 2.2, 3.3</r>
+    </measValue>
+  </measInfo>
+</measCollec>

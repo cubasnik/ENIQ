@@ -26,6 +26,7 @@ jobs:
       run: |
         build\${{ matrix.config }}\test_parser.exe
         build\${{ matrix.config }}\test_parser_ns.exe
+        build\${{ matrix.config }}\test_cli.exe
         build\${{ matrix.config }}\test_localization.exe
 
     - name: Run tests on Linux
@@ -33,6 +34,7 @@ jobs:
       run: |
         ./build/test_parser
         ./build/test_parser_ns
+        ./build/test_cli
         ./build/test_localization
 
     - name: Upload build artifacts
